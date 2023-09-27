@@ -15,8 +15,7 @@ function Hero() {
             </h1>
             <hr className="w-48 h-1 mx-auto my-4 bg-blue-950 border-0 rounded md:my-10"></hr>
             <p className="mb-4 font-extralight   text-gray-600 lg:text-xl sm:px-16 lg:px-48">
-              Ready to unlock boundless business opportunities with Bisnexplore
-              ajmal?
+              Ready to unlock boundless business opportunities with Bisnexplore?
             </p>
             <hr className="border-1 border-gray-200 mb-1 mx-auto drop-shadow-sm" />
           </div>
