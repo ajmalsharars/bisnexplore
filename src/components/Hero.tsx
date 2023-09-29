@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import svg from "../../public/images/hero.png";
+
 function Hero() {
   return (
     <div>

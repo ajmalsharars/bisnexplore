@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import logo from "../../public/images/logo_1.png";
+import Link from "next/link";
 function Header() {
   return (
     <div>
@@ -16,18 +17,22 @@ function Header() {
             />
           </a>
           <div className="flex md:order-2">
-            <button
-              type="button"
-              className="text-gray-700 bg-white  focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2"
-            >
-              Join now
-            </button>
-            <button
-              type="button"
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Sign in
-            </button>
+            <Link href={"/signup"}>
+              <button
+                type="button"
+                className="text-gray-700 bg-white  focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2"
+              >
+                Join now
+              </button>
+            </Link>
+            <Link href={"/signin"}>
+              <button
+                type="button"
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                Sign in
+              </button>
+            </Link>
             <button
               data-collapse-toggle="navbar-cta"
               type="button"

@@ -4,9 +4,9 @@ import figure_1 from "../../public/images/figure_1.svg";
 function Sections() {
   return (
     <div>
-      <header className="bg-white pattern">
+      <div className="bg-white pattern">
         <div className="container px-6 mx-auto">
-          <div className="flex items-center justify-center gap-20 py-6 lg:h-[36rem] lg:flex-row">
+          <div className="flex flex-wrap items-center justify-center gap-20 py-6 lg:h-[36rem] lg:flex-row">
             <div className="lg:w-1/2">
               <hr className="w-48 h-1 mx-auto my-4 bg-blue-950 border-0 rounded md:my-10"></hr>
               <h2 className="text-3xl font-semibold text-blue-950 lg:text-4xl">
@@ -34,7 +34,7 @@ function Sections() {
             </div>
           </div>
         </div>
-      </header>
+      </div>
       <hr className="w-48 h-1 mx-auto my-4 bg-blue-950 border-0 rounded md:my-10"></hr>
     </div>
   );

@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import logo from "../../public/images/logo.png";
+import Link from "next/link";
 function Footer() {
   return (
     <div>
@@ -22,9 +23,14 @@ function Footer() {
               <h3 className="tracki uppercase text-gray-50">General</h3>
               <ul className="space-y-1">
                 <li>
-                  <a rel="noopener noreferrer" href="#">
+                  <Link rel="noopener noreferrer" href="/">
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link rel="noopener noreferrer" href="/about">
                     About us
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <a rel="noopener noreferrer" href="#">
