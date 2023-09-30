@@ -1,7 +1,6 @@
 import coverPhoto from "../../../public/images/about.jpg";
 import Image from "next/image";
 async function page() {
-  await new Promise((resolve) => setTimeout(resolve, 5000));
   return (
     <div className="bg-gray-50">
       <section
