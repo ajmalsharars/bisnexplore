@@ -72,7 +72,7 @@ function SectionThree() {
               ENHANCED VISIBILITY AND DISCOVERABILITY
             </h2>
           </div>
-          <p className="text-gray-400 text-justify text-xs">
+          <p className="text-gray-400 text-xs">
             Our solution enhances your organization's online presence, making
             your products and services more visible and easier to discover by
             your target audience
@@ -108,7 +108,7 @@ function SectionThree() {
               STREAMLINED PROCESS
             </h2>
           </div>
-          <p className="text-gray-400 text-justify text-xs">
+          <p className="text-gray-400  text-xs">
             Our platform significantly reduces processing time, enhancing
             operational productivity and allowing you to allocate resources more
             effectively.
@@ -166,7 +166,7 @@ function SectionThree() {
               ACCESSIBILITY
             </h2>
           </div>
-          <p className="text-gray-400 text-justify text-xs">
+          <p className="text-gray-400 text-xs">
             Experience seamless access to critical resources and information,
             streamlining operations and ensuring efficient workflows <br />
             <br />
@@ -210,7 +210,7 @@ function SectionThree() {
               RELATIONSHIP MANAGEMENT
             </h2>
           </div>
-          <p className="text-gray-400 text-justify text-xs">
+          <p className="text-gray-400 text-xs">
             Foster and nurture valuable relationships with clients, partners,
             and stakeholders through our comprehensive relationship management
             tools and strategies.
