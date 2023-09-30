@@ -8,7 +8,7 @@ function Footer() {
       <footer className="px-4 divide-y bg-gray-800 text-gray-100">
         <div className="container flex flex-col justify-between py-16 mx-auto space-y-8 lg:flex-row lg:space-y-0">
           <div className="lg:w-1/3">
-            <a href="#" className="flex items-center m-0 p-0">
+            <Link href="/" className="flex items-center m-0 p-0">
               <Image
                 src={logo}
                 width={120}
@@ -16,7 +16,7 @@ function Footer() {
                 alt="Bisnexplore Logo"
                 quality={100}
               />
-            </a>
+            </Link>
           </div>
           <div className="grid grid-cols-3 text-sm gap-x-20 gap-y-8 lg:w-2/3 sm:grid-cols-4">
             <div className="space-y-3">

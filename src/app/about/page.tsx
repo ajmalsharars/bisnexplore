@@ -1,9 +1,7 @@
 import coverPhoto from "../../../public/images/about.jpg";
-import vission from "../../../public/images/vission.jpg";
-import mission from "../../../public/images/mission.jpg";
-import who from "../../../public/images/who.jpg";
 import Image from "next/image";
-function page() {
+async function page() {
+  await new Promise((resolve) => setTimeout(resolve, 5000));
   return (
     <div className="bg-gray-50">
       <section
@@ -18,47 +16,13 @@ function page() {
             Welcome to Bisnexplore, the world’s first platform where companies
             connect with each other word wide to amplify their businesses.
           </p>
-          <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
-            <a
-              href="#"
-              className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
-            >
-              Get started
-              <svg
-                className="w-3.5 h-3.5 ml-2"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 14 10"
-              >
-                <path
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M1 5h12m0 0L9 1m4 4L9 9"
-                />
-              </svg>
-            </a>
-            <a
-              href="#"
-              className="inline-flex justify-center hover:text-gray-900 items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400"
-            >
-              Learn more
-            </a>
-          </div>
+          <hr className="w-48 h-1 mx-auto my-4 bg-gray-50 border-0 rounded md:my-10"></hr>
         </div>
       </section>
       {/* Start of Cards */}
       <div className="bg-gray-50 flex flex-wrap gap-6 justify-center items-center mb-10 mt-10 pt-10 pb-10">
         <div className="w-full max-w-xs px-8 py-4 items-center bg-white rounded-2xl shadow-lg">
-          <div className="flex justify-center  md:justify-end">
-            <Image
-              className="object-cover w-20 h-20 border-2 border-blue-500 rounded-full"
-              alt="Testimonial avatar"
-              src={vission}
-            />
-          </div>
+          <div className="flex justify-center  md:justify-end"></div>
 
           <h2 className="mt-2 text-xl font-semibold  md:mt-0 text-blue-600">
             Our vision
@@ -72,13 +36,7 @@ function page() {
         </div>
 
         <div className="w-full max-w-xs px-8 py-4 items-center bg-white rounded-2xl shadow-lg">
-          <div className="flex justify-center  md:justify-end">
-            <Image
-              className="object-cover w-20 h-20 border-2 border-blue-500 rounded-full"
-              alt="Testimonial avatar"
-              src={mission}
-            />
-          </div>
+          <div className="flex justify-center  md:justify-end"></div>
 
           <h2 className="mt-2 text-xl font-semibold  md:mt-0 text-blue-600">
             Our mission
@@ -92,14 +50,6 @@ function page() {
         </div>
 
         <div className="w-full max-w-xs px-8 py-4 items-center bg-white rounded-2xl shadow-lg">
-          <div className="flex justify-center  md:justify-end">
-            <Image
-              className="object-cover w-20 h-20 border-2 border-blue-500 rounded-full"
-              alt="Testimonial avatar"
-              src={who}
-            />
-          </div>
-
           <h2 className="mt-2 text-xl font-semibold md:mt-0 text-blue-600">
             Who we are
           </h2>

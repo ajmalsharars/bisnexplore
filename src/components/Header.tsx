@@ -7,7 +7,7 @@ function Header() {
     <div>
       <nav className="bg-white">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto pl-4 pr-4 pt-2 pb-1">
-          <a href="#" className="flex items-center m-0 p-0">
+          <Link href="/" className="flex items-center m-0 p-0">
             <Image
               src={logo}
               width={90}
@@ -15,7 +15,7 @@ function Header() {
               alt="Bisnexplore Logo"
               quality={100}
             />
-          </a>
+          </Link>
           <div className="flex md:order-2">
             <Link href={"/signup"}>
               <button

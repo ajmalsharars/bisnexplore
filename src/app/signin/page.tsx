@@ -7,7 +7,7 @@ const page = () => {
         <div className="flex min- overflow-hidden justify-center items-center ">
           <div className="relative flex-1 justify-center items-center hidden w-0 overflow-hidden lg:block ">
             <div className="flex flex-col justify-center items-center">
-              <h1 className="mb-8 text-2xl font-extrabold leading-8 tracking-tight  text-blue-950 md:text-2xl lg:text-2xl">
+              <h1 className="mb-8 text-4xl font-extralight leading-8 tracking-tight  text-blue-950 md:text-2xl lg:text-4xl">
                 Explore unlimited business opportunities with{" "}
               </h1>
               <h1 className="text-fuchsia-900 uppercase font-extrabold text-6xl ">
@@ -108,7 +108,7 @@ const page = () => {
                   <div>
                     <button
                       type="submit"
-                      className="w-full items-center block px-10 py-3.5 text-base font-medium text-center text-blue-600 transition duration-500 ease-in-out transform border-2 border-white shadow-md rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                      className="w-full items-center block px-10 py-3.5 text-base font-medium text-center text-blue-600 transition duration-500 ease-in-out transform border-2 border-gray-100  rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                     >
                       <div className="flex items-center justify-center">
                         <svg
