@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import logo from "../../public/images/logo_1.png";
+import logo from "../../public/images/logo_1.svg";
 import Link from "next/link";
 function Header() {
   return (
