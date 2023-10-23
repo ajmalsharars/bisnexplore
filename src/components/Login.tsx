@@ -12,8 +12,19 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
+import Collapse from "@mui/material/Collapse";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 
 const Login = () => {
+  const [msg, setMsg] = useState("");
+  const [open, setOpen] = useState(true);
+  const router = useRouter();
   const schema = z.object({
     email: z.string().email("Invalid email address"),
     password: z
@@ -28,13 +39,53 @@ const Login = () => {
     formState: { errors },
   } = useForm<FormValue>({ resolver: zodResolver(schema) });
 
-  const onFormSubmit = (data: any) => {
-    alert(data.email);
+  const onFormSubmit = async (data: any) => {
+    console.log("submited");
+    const singInData = await signIn("credentials", {
+      email: data.email,
+      password: data.password,
+      redirect: false,
+    });
+    if (singInData?.error) {
+      setMsg(
+        "The user does not exist. Please make sure you have entered the correct email and password."
+      );
+    } else {
+      router.refresh();
+      router.push("/completeregister");
+    }
   };
 
   return (
     <div>
       <Container component="main" maxWidth="xs">
+        {/* Show the message if error login */}
+        {msg ? (
+          <Collapse in={open}>
+            <Alert
+              severity="error"
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => {
+                    setOpen(false);
+                  }}
+                >
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
+              sx={{ mb: 2 }}
+            >
+              <AlertTitle>Error</AlertTitle>
+              {msg}
+            </Alert>
+          </Collapse>
+        ) : (
+          ""
+        )}
+
         <Box
           className=" px-10 py-5 border-2 border-gray-100  rounded-md"
           sx={{

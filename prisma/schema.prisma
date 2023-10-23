@@ -1,0 +1,106 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+// datasource db {
+//   provider = "postgresql"
+//   url      = env("DATABASE_URL")
+// }
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+model comments {
+  commentId    Int            @id @default(autoincrement())
+  postId       Int
+  userId       Int
+  content      String?
+  createdAt    DateTime?      @default(now()) @db.Timestamptz(6)
+  updatedAt    DateTime?      @default(now()) @db.Timestamptz(6)
+  posts        posts          @relation(fields: [postId], references: [postId], onDelete: NoAction, onUpdate: NoAction)
+  users        users          @relation(fields: [userId], references: [userId], onDelete: NoAction, onUpdate: NoAction)
+  likecomments likecomments[]
+}
+
+model connections {
+  connectionId                        Int       @id @default(autoincrement())
+  senderID                            Int
+  receiverID                          Int
+  status                              String?   @db.VarChar(50)
+  createdAt                           DateTime? @default(now()) @db.Timestamptz(6)
+  users_connections_receiverIDTousers users     @relation("connections_receiverIDTousers", fields: [receiverID], references: [userId], onDelete: NoAction, onUpdate: NoAction)
+  users_connections_senderIDTousers   users     @relation("connections_senderIDTousers", fields: [senderID], references: [userId], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model likecomments {
+  likeCommentId Int       @id @default(autoincrement())
+  commentId     Int
+  userId        Int
+  createdAt     DateTime? @default(now()) @db.Timestamptz(6)
+  comments      comments  @relation(fields: [commentId], references: [commentId], onDelete: NoAction, onUpdate: NoAction)
+  users         users     @relation(fields: [userId], references: [userId], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model likes {
+  likeId    Int       @id @default(autoincrement())
+  postId    Int
+  userId    Int
+  createdAt DateTime? @default(now()) @db.Timestamptz(6)
+  posts     posts     @relation(fields: [postId], references: [postId], onDelete: NoAction, onUpdate: NoAction)
+  users     users     @relation(fields: [userId], references: [userId], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model notifications {
+  notificationID      Int       @id @default(autoincrement())
+  userId              Int
+  notificationType    String?   @db.VarChar(50)
+  notificationContent String?
+  isRead              Boolean?  @default(false)
+  createdAt           DateTime? @default(now()) @db.Timestamptz(6)
+  users               users     @relation(fields: [userId], references: [userId], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model posts {
+  postId    Int        @id @default(autoincrement())
+  userId    Int
+  content   String?
+  image     String?    @db.VarChar(255)
+  createdAt DateTime?  @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime?  @default(now()) @db.Timestamptz(6)
+  comments  comments[]
+  likes     likes[]
+  users     users      @relation(fields: [userId], references: [userId], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model userprofile {
+  userProfileID Int       @id @default(autoincrement())
+  userId        Int
+  dob           DateTime? @db.Date
+  phoneNumber   String?   @db.VarChar(20)
+  createdAt     DateTime? @default(now()) @db.Timestamptz(6)
+  updatedAt     DateTime? @default(now()) @db.Timestamptz(6)
+  users         users     @relation(fields: [userId], references: [userId], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model users {
+  userId                                    Int             @id @default(autoincrement())
+  userUniqueId                              String?         @default(dbgenerated("uuid_generate_v4()")) @db.VarChar(255)
+  firstName                                 String?         @db.VarChar(255)
+  lastName                                  String?         @db.VarChar(255)
+  email                                     String          @unique @db.VarChar(255)
+  password                                  String          @db.VarChar(255)
+  profilePicture                            String?         @db.VarChar(255)
+  isActive                                  Boolean?        @default(true)
+  createdAt                                 DateTime?       @default(now()) @db.Timestamptz(6)
+  updatedAt                                 DateTime?       @default(now()) @db.Timestamptz(6)
+  comments                                  comments[]
+  connections_connections_receiverIDTousers connections[]   @relation("connections_receiverIDTousers")
+  connections_connections_senderIDTousers   connections[]   @relation("connections_senderIDTousers")
+  likecomments                              likecomments[]
+  likes                                     likes[]
+  notifications                             notifications[]
+  posts                                     posts[]
+  userprofile                               userprofile[]
+}

@@ -1,18 +1,37 @@
 "use client";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { any, string, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import IconButton from "@mui/material/IconButton";
 import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
+import Collapse from "@mui/material/Collapse";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import CloseIcon from "@mui/icons-material/Close";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { register } from "module";
 
 const Register = () => {
+  const [msg, setMsg] = useState("");
+  const [open, setOpen] = useState(true);
+  const [isChecked, setIsChecked] = useState(false);
+  const router = useRouter();
+
+  //Enable disable submit button
+  const handleCheckboxChange = (event: any) => {
+    setIsChecked(event.target.checked);
+  };
+
+  //Validation schema
   const schema = z
     .object({
       firstname: z.string().min(3, "Firstname must be 3 characters or more."),
@@ -34,21 +53,96 @@ const Register = () => {
 
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm<FormValue>({ resolver: zodResolver(schema) });
 
-  const onFormSubmit = (data: any) => {
-    alert(data);
+  //Submit the form
+  const onFormSubmit = async (data: any) => {
+    const response = await fetch("/api/user", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        firstname: data.firstname,
+        lastname: data.lastname,
+        email: data.email,
+        password: data.password,
+      }),
+    });
+    if (response.ok) {
+      const data = await response.json();
+      setMsg(data.message);
+      reset();
+      //router.push("/signup");
+    } else {
+      const data = await response.json();
+      setOpen(true);
+      setMsg(data.message);
+    }
   };
 
   return (
     <div>
       <Container component="main" maxWidth="sm" className="mb-10 scale-90">
+        {msg &&
+        msg ==
+          "User already exists! Please try using a different email address." ? (
+          <Collapse in={open}>
+            <Alert
+              severity="error"
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => {
+                    setOpen(false);
+                  }}
+                >
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
+              sx={{ mb: 2 }}
+            >
+              <AlertTitle>Error</AlertTitle>
+              {msg}
+            </Alert>
+          </Collapse>
+        ) : (
+          ""
+        )}
+
+        {msg && msg == "User created successfully." ? (
+          <Collapse in={open}>
+            <Alert
+              severity="success"
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => {
+                    setOpen(false);
+                  }}
+                >
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
+              sx={{ mb: 2 }}
+            >
+              <AlertTitle>Congratulations!</AlertTitle>
+              {msg}
+            </Alert>
+          </Collapse>
+        ) : (
+          ""
+        )}
+
         <Box
           className=" px-10 py-5 border-2 border-gray-100  rounded-md"
           sx={{
-            marginTop: 8,
+            marginTop: 4,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -142,7 +236,12 @@ const Register = () => {
               <Grid item xs={12}>
                 <FormControlLabel
                   control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
+                    <Checkbox
+                      value="allowExtraEmails"
+                      color="primary"
+                      checked={isChecked}
+                      onChange={handleCheckboxChange}
+                    />
                   }
                   label={
                     <Typography className="text-xs">
@@ -156,6 +255,7 @@ const Register = () => {
               </Grid>
             </Grid>
             <Button
+              disabled={!isChecked}
               type="submit"
               fullWidth
               variant="contained"
@@ -164,7 +264,7 @@ const Register = () => {
             >
               Sign Up
             </Button>
-            <Grid container justifyContent="flex-end">
+            <Grid container justifyContent="center">
               <Grid item>
                 <Link href="/signin" variant="body2">
                   Already have an account? Sign in
