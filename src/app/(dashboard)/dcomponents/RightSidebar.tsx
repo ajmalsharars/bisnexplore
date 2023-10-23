@@ -18,7 +18,7 @@ const RightSidebar = () => {
             <CardHeader
               avatar={<Avatar src="/profile-pic.jpg" />}
               title="John Doe"
-              subheader="2 hours ago"
+              subheader="3 hours ago"
             />
             <CardContent>
               <Typography variant="h6">My Latest Post</Typography>
